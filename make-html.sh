@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-PATH+=:$(cat ~/.ADDPATH | paste -s -d :)
+PATH=$(cat ~/.ADDPATH | paste -s -d :):${PATH}
 
-cat <(date) \
+cat <(echo "<b>Last Update: " $(date) "</b>") \
     <(echo "<table>") \
     <(pandamon -u 'Andrea Matic' group.phys-exot*EXOT27 -j |\
           jq '[.[] | {"id": (.taskname | split(".")[3]), "name": (.taskname | split(".")[4]), "fullname": .taskname, "done": .dsinfo.pctfinished, "failed": .dsinfo.pctfailed, "input": [.datasets[] | select(.type == "input") | .containername][0]}]' |\
