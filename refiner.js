@@ -18,9 +18,9 @@
     group_by(.id) |
     [.[] | {
         id: .[0].id,
-        name: .[0].name,
+        input: .[0].input,
         campaigns: [
                 .[] | {(.campaign + .channel):{done,failed,revision}}
-        ],
+        ] | add,
     }
-    ] | .[-1]
+    ]

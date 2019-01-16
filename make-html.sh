@@ -18,6 +18,6 @@ cat <<EOF > $OUTFILE
 <b>Last Update: $(date) </b>
 <table>
 EOF
-cat $TMP/refined.json | jq ' .[] | @html "<tr><th> \(.id) </label><th><label title=\"\(.input)\"> \(.name) </label></th><th style=\"background-color:rgba(0,255,0,\(.done/100))\"> \(.done) </th><th style=\"background-color:rgba(255,0,0,\(.failed/100));\"> \(.failed) </th><th>\(.sites)</th></tr>"' -r >> $OUTFILE
+cat $TMP/refined.json | jq -f formatter.js -r >> $OUTFILE
 
 echo "</table>" >> $OUTFILE
