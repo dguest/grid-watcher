@@ -9,9 +9,18 @@
             .datasets[] | select(.type == "input") | .containername][0],
     "sites": [.datasets[].site] | join(" "),
     "grouping": (.taskname | split(".") | .[5] = .[5][:-1] | join(".")),
-    "revision": (.taskname | split(".")[5] | split("")[-1]),
-    "campaign": (.taskname | split(".")[5] | split("")[-2])
+    "revision": (.taskname | split(".")[5] | .[-1:]),
+    "campaign": (.taskname | split(".")[5] | .[-2:-1])
 }] |
+    [.[] | . + {channel: (.grouping | split(".")[5] | .[:2])}] |
     group_by(.grouping) |
     [.[] | max_by(.revision)] |
-    group_by(.id)
+    group_by(.id) |
+    [.[] | {
+        id: .[0].id,
+        name: .[0].name,
+        campaigns: [
+                .[] | {(.campaign + .channel):{done,failed,revision}}
+        ],
+    }
+    ] | .[-1]
