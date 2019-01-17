@@ -8,7 +8,7 @@
   "failed": .dsinfo.pctfailed,
   "input": [
             .datasets[] | select(.type == "input") | .containername][0],
-  "sites": [.datasets[].site] | join(" "),
+  "sites": [.datasets[] | select(.type == "output") | .site],
   "grouping": (.taskname | split(".") | .[5] = .[5][:-1] | join(".")),
   "revision": (.taskname | split(".")[5] | .[-1:] | tonumber),
   "campaign": (.taskname | split(".")[5] | .[-2:-1])
@@ -30,7 +30,7 @@ group_by(.id) |
    .[] |
    {(.campaign + .channel):
     {
-     done,failed,revision, status,
+     done,failed,revision,status,sites,
      url: @uri "https://bigpanda.cern.ch/tasks/?taskname=\(.taskname)",
      }}
    ] | add,

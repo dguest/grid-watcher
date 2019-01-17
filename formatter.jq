@@ -1,6 +1,6 @@
 .[] |
 @html "<tr>" +
-@html "<th> <label title=\"\(.input)\">\(.name)</label></th>" +
+@html "<td> <label title=\"\(.input)\">\(.name)</label></td>" +
 ([.campaigns["a0L","d0L","e0L","a1L","d1L","e1L","a2L","d2L","e2L"] |
   . + {statusstr:
        (
@@ -10,6 +10,6 @@
        dnum: (.done // " "),
        failedness: (.failed * 0.01 ? // 0),
        fnum: (.failed // " ")} |
-  @html "<th>" + .statusstr + @html "</th>" +
-  @html "<th style=\"background-color:rgba(0,255,0,\(.doneness))\">\(.dnum) </th>" +
-  @html "<th style=\"background-color:rgba(255,0,0,\(.failedness));\"> \(.fnum) </th>"] | add) + @html "</tr>"
+  @html "<td>" + .statusstr + @html "</td>" +
+  @html "<td style=\"background-color:rgba(0,255,0,\(.doneness))\">\(.dnum) </td>" +
+  @html "<td style=\"background-color:rgba(255,0,0,\(.failedness));\"> \(.fnum) </td>"] | add) + @html "</tr>"
