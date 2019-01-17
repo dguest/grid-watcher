@@ -1,0 +1,3 @@
+[submodule "pandamonium"]
+	path = pandamonium
+	url = git@github.com:dguest/pandamonium.git

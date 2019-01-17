@@ -1,0 +1,5 @@
+# ignore bin
+/bin/
+
+# ignore temp files
+/temp/
