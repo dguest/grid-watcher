@@ -63,6 +63,10 @@ table {
   width: 100%;
 }
 
+.badjob {
+  font-weight:bold;
+}
+
 td {
   border: 1px solid #dddddd;
   text-align: left;
@@ -70,7 +74,7 @@ td {
 }
 
 th {
-  border: 2px solid #aaaaaa
+  border: 2px solid #aaaaaa;
 }
 
 td:nth-child(3n+1) {
@@ -78,7 +82,7 @@ td:nth-child(3n+1) {
 }
 
 tr:nth-child(even) {
-  background-color: #00ffff22;
+  background-color: #00ffff11;
 }
 </style>
 </head>
