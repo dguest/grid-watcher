@@ -20,19 +20,19 @@ group_by(.grouping) |
 [.[] | max_by(.revision)] |
 # Now we form groups based on the dataset id
 group_by(.id) |
-[.[] |
- {
-  id: .[0].id,
-  name: .[0].name,
-  input: .[0].input,
-  campaigns:
-  [
-   .[] |
-   {(.campaign + .channel):
-    {
-     done,failed,revision,status,sites,
-     url: @uri "https://bigpanda.cern.ch/tasks/?taskname=\(.taskname)",
-     }}
-   ] | add,
-  }
- ]
+.[] |
+{
+ id: .[0].id,
+ name: .[0].name,
+ input: .[0].input,
+ campaigns:
+ [
+  .[] |
+  {(.campaign + .channel):
+   {
+    done,failed,revision,status,sites,
+    url: @uri "https://bigpanda.cern.ch/tasks/?taskname=\(.taskname)",
+    }}
+  ] | add,
+ }
+

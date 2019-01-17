@@ -1,4 +1,3 @@
-.[] |
 @html "<tr>" +
 @html "<td> <label title=\"\(.input)\">\(.name)</label></td>" +
 ([.campaigns["a0L","d0L","e0L","a1L","d1L","e1L","a2L","d2L","e2L"] |
