@@ -2,8 +2,11 @@
 
 DR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-TP=$DR/temp
-OUT=temp
+TP=/tmp/$(date +%F_%H-%M)
+OUT=/afs/cern.ch/user/d/dguest/www/monitoring/
+if [[ ! -d $OUT ]]; then
+    OUT=temp/
+fi
 
 PMON=$DR/pandamonium/pandamon
 JQ=$DR/bin/jq
@@ -35,7 +38,7 @@ if [[ ! -f $TP/rawpanda.json ]] ; then
     $PMON -u 'Andrea Matic' group.phys-exot*EXOT27 -j > $TP/rawpanda.json
 fi
 
-cat ${TP}/rawpanda.json | $JQ -f $DR/refiner.jq | tee $TP/refined.json
+cat ${TP}/rawpanda.json | $JQ -f $DR/refiner.jq > $TP/refined.json
 
 OUTFILE=$OUT/mono-h-mc.html
 cat <<EOF > $OUTFILE
