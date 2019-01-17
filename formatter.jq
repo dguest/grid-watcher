@@ -8,7 +8,8 @@
        doneness: (.done * 0.01 ? // 0),
        dnum: (.done // " "),
        failedness: (.failed * 0.01 ? // 0),
-       fnum: (.failed // " ")} |
-  @html "<td>" + .statusstr + @html "</td>" +
+       fnum: (.failed // " "),
+       tip: (.channel + ", MC " + .campaign)} |
+  @html "<td><label title=\"\(.tip)\">" + .statusstr + @html "</label></td>" +
   @html "<td style=\"background-color:rgba(0,255,0,\(.doneness))\">\(.dnum) </td>" +
   @html "<td style=\"background-color:rgba(255,0,0,\(.failedness));\"> \(.fnum) </td>"] | add) + @html "</tr>"

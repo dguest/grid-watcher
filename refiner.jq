@@ -30,7 +30,7 @@ group_by(.id) |
   .[] |
   {(.campaign + .channel):
    {
-    done,failed,revision,status,sites,
+    done,failed,revision,status,sites,campaign,channel,
     url: @uri "https://bigpanda.cern.ch/tasks/?taskname=\(.taskname)",
     }}
   ] | add,

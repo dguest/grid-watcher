@@ -63,10 +63,18 @@ table {
   width: 100%;
 }
 
-td, th {
+td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+
+th {
+  border: 2px solid #aaaaaa
+}
+
+td:nth-child(3n+1) {
+  border-right: 2px solid #aaaaaa;
 }
 
 tr:nth-child(even) {
