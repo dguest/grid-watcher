@@ -11,13 +11,13 @@ if [[ ! -f $TMP/rawpanda.json ]] ; then
     pandamon -u 'Andrea Matic' group.phys-exot*EXOT27 -j > $TMP/rawpanda.json
 fi
 
-cat ${TMP}/rawpanda.json | jq -f refiner.js | tee $TMP/refined.json
+cat ${TMP}/rawpanda.json | jq -f refiner.jq | tee $TMP/refined.json
 
 OUTFILE=$OUT/mono-h-mc.html
 cat <<EOF > $OUTFILE
 <b>Last Update: $(date) </b>
 <table>
 EOF
-cat $TMP/refined.json | jq -f formatter.js -r >> $OUTFILE
+cat $TMP/refined.json | jq -f formatter.jq -r >> $OUTFILE
 
 echo "</table>" >> $OUTFILE
