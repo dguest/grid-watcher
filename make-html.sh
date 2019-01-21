@@ -11,28 +11,6 @@ if [[ ! -d $OUT ]]; then
 fi
 
 PMON=$DR/pandamonium/pandamon
-JQ=$DR/bin/jq
-
-if [[ ! -f $JQ ]] ; then
-    JQ_URL=https://github.com/stedolan/jq/releases/download/jq-1.6/
-    JQ_VERS=jq-linux64
-    echo "getting jq"
-    wget ${JQ_URL}/${JQ_VERS}
-    mkdir -p $DR/bin
-    mv ${JQ_VERS} $JQ
-    chmod +x $JQ
-fi
-
-# check JQ
-if ! $JQ --version &> /dev/null; then
-    # try local version
-    if type jq &> /dev/null; then
-        JQ=jq
-    else
-        echo "JQ not working" >&2
-        exit 1
-    fi
-fi
 
 if [[ ! -d $TP ]] ; then mkdir $TP ; fi
 
@@ -40,6 +18,7 @@ if [[ ! -f $TP/rawpanda.json ]] ; then
     echo "run pandamon from $DR"
     $PMON -d 50 -u 'Andrea Matic' group.phys-exot*EXOT27 -j > $TP/rawpanda.json
 fi
+JQ=jq
 
 echo "refine output"
 cat ${TP}/rawpanda.json | $JQ -f $DR/refiner.jq > $TP/refined.json
