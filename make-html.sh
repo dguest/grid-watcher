@@ -34,12 +34,6 @@ if ! $JQ --version &> /dev/null; then
     fi
 fi
 
-PY=~dguest/public/Python2.7/bin/python2.7
-if [[ -f $PY ]]; then
-    echo "using hardcoded python"
-    PMON="$PY $PMON";
-fi
-
 if [[ ! -d $TP ]] ; then mkdir $TP ; fi
 
 if [[ ! -f $TP/rawpanda.json ]] ; then
