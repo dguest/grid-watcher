@@ -44,7 +44,7 @@ if [[ ! -d $TP ]] ; then mkdir $TP ; fi
 
 if [[ ! -f $TP/rawpanda.json ]] ; then
     echo "run pandamon from $DR"
-    $PMON -u 'Andrea Matic' group.phys-exot*EXOT27 -j > $TP/rawpanda.json
+    $PMON -d 50 -u 'Andrea Matic' group.phys-exot*EXOT27 -j > $TP/rawpanda.json
 fi
 
 echo "refine output"
@@ -56,35 +56,9 @@ OUTFILE=$OUT/mono-h-mc.html
 cat <<EOF > $OUTFILE
 <html>
 <head>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.badjob {
-  font-weight:bold;
-}
-
-td {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-th {
-  border: 2px solid #aaaaaa;
-}
-
-td:nth-child(3n+1) {
-  border-right: 2px solid #aaaaaa;
-}
-
-tr:nth-child(even) {
-  background-color: #00ffff11;
-}
-</style>
+<link rel = "stylesheet"
+   type = "text/css"
+   href = "style.css" />
 </head>
 <body>
 <b>Powered by <a href="https://github.com/dguest/grid-watcher">grid-watcher</a>. Last Update: $(date) </b>
@@ -92,6 +66,7 @@ tr:nth-child(even) {
 <th>name</th><th colspan="3">a0L</th><th colspan="3">d0L</th><th colspan="3">e0L</th><th colspan="3">a1L</th><th colspan="3">d1L</th><th colspan="3">e1L</th><th colspan="3">a2L</th><th colspan="3">d2L</th><th colspan="3">e2L</th>
 EOF
 cat $TP/refined.json | $JQ -f $DR/formatter.jq -r >> $OUTFILE
+cp -f $DR/style.css $OUT
 
 cat <<EOF >> $OUTFILE
 </table>

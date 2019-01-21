@@ -1,0 +1,27 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.badjob {
+  font-weight:bold;
+}
+
+td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  border: 2px solid #aaaaaa;
+}
+
+td:nth-child(3n+1) {
+  border-right: 2px solid #aaaaaa;
+}
+
+tr:nth-child(even) {
+  background-color: #00ffff11;
+}
