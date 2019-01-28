@@ -9,9 +9,9 @@
   "input": [
             .datasets[] | select(.type == "input") | .containername][0],
   "sites": [.datasets[] | select(.type == "output") | .site],
-  "grouping": (.taskname | split(".") | .[5] = .[5][:-1] | join(".")),
-  "revision": (.taskname | split(".")[5] | .[-1:] | tonumber),
-  "campaign": (.taskname | split(".")[5] | .[-2:-1])
+  "grouping": (.taskname | split(".") | .[5] = .[5][:7] | join(".")),
+  "revision": (.taskname | split(".")[5] | .[7:8] | tonumber),
+  "campaign": (.taskname | split(".")[5] | .[6:7])
   }] |
 # We also want to cluster by the channel, we only care about the later
 # revisions for a given channel
