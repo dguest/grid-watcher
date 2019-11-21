@@ -10,7 +10,7 @@
             .datasets[] | select(.type == "input") | .containername][0],
   "sites": [.datasets[] | select(.type == "output") | .site],
   "grouping": (.taskname | split(".") | .[5] = .[5][:7] | join(".")),
-  "revision": (.taskname | split(".")[5] | .[7:8] | tonumber),
+  "revision": (.taskname | split(".")[5] | .[0:4] | tonumber),
   "campaign": (.taskname | split(".")[5] | .[6:7])
   }] |
 # We also want to cluster by the channel, we only care about the later
