@@ -9,13 +9,13 @@
   "input": [
             .datasets[] | select(.type == "input") | .containername][0],
   "sites": [.datasets[] | select(.type == "output") | .site],
-  "grouping": (.taskname | split(".") | .[5] = .[5][:7] | join(".")),
-  "revision": (.taskname | split(".")[5] | .[0:4] | tonumber),
-  "campaign": (.taskname | split(".")[5] | .[6:7])
+  "grouping": (.taskname | split(".") | join(".")),
+  "revision": 1,
+  "campaign": (.taskname | split(".")[5] | .[4:5])
   }] |
 # We also want to cluster by the channel, we only care about the later
 # revisions for a given channel
-[.[] | . + {channel: (.grouping | split(".")[5] | .[:2])}] |
+[.[] | . + {channel: "0L"}] |
 group_by(.grouping) |
 [.[] | max_by(.revision)] |
 # Now we form groups based on the dataset id

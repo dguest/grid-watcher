@@ -21,7 +21,7 @@ fi
 JQ=jq
 
 echo "refine output"
-cat ${TP}/rawpanda.json | $JQ -f $DR/refiner.jq > $TP/refined.json
+cat ${TP}/rawpanda.json | $JQ . | $JQ -f $DR/refiner.jq > $TP/refined.json
 
 
 echo "format output"
@@ -36,7 +36,7 @@ cat <<EOF > $OUTFILE
 <body>
 <b>Powered by <a href="https://github.com/dguest/grid-watcher">grid-watcher</a>. Last Update: $(date) </b>
 <table>
-<th>name</th><th colspan="3">a0L</th><th colspan="3">d0L</th><th colspan="3">e0L</th><th colspan="3">a1L</th><th colspan="3">d1L</th><th colspan="3">e1L</th><th colspan="3">a2L</th><th colspan="3">d2L</th><th colspan="3">e2L</th>
+<th colspan="2">name</th><th colspan="3">a0L</th><th colspan="3">d0L</th><th colspan="3">e0L</th>
 EOF
 cat $TP/refined.json | $JQ -f $DR/formatter.jq -r >> $OUTFILE
 cp -f $DR/style.css $OUT
